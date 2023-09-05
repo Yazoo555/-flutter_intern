@@ -17,6 +17,7 @@ class _CvPageState extends State<CvPage> {
   TextEditingController lastNameController = TextEditingController();
   TextEditingController ageController = TextEditingController();
   String? selectedGender = "";
+  List<String> selectedSkills = [];
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +33,7 @@ class _CvPageState extends State<CvPage> {
             ),
           ),
         ),
-        elevation: .6,
+        elevation: .55,
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -73,7 +74,11 @@ class _CvPageState extends State<CvPage> {
                 },
                 selectedGender: selectedGender,
               ),
-              ChooseSkills(),
+              ChooseSkills(onSkillChanged: (skill) {
+                setState(() {
+                  selectedSkills = skill;
+                });
+              }),
             ],
           ),
         ),
