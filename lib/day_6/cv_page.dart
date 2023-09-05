@@ -111,6 +111,13 @@ class _CvPageState extends State<CvPage> {
                       style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.all<Color>(
                             Colors.orange.shade500),
+                        shape:
+                            MaterialStateProperty.all<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(
+                                10.0), // Adjust the radius as needed
+                          ),
+                        ),
                       ),
                       child: Text("Add"),
                     ),
