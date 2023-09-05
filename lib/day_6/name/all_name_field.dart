@@ -4,6 +4,7 @@ class AllNameField extends StatelessWidget {
   final String name;
   final String hintText;
   final TextEditingController controller;
+
   // final String? Function(String?)? validator;
   const AllNameField(
       {

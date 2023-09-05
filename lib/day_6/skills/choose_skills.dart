@@ -37,7 +37,7 @@ class _ChooseSkillsState extends State<ChooseSkills> {
         Text(
           "Choose Skills",
           style: TextStyle(
-            fontSize: 16,
+            fontSize: 15,
           ),
         ),
         SizedBox(

@@ -1,6 +1,8 @@
 import 'package:day_6_cv/day_6/age/age_field.dart';
 import 'package:day_6_cv/day_6/name/all_name_field.dart';
 import 'package:day_6_cv/day_6/skills/choose_skills.dart';
+import 'package:day_6_cv/day_6/workExperience/add_experience.dart';
+import 'package:day_6_cv/day_6/workExperience/work_experience.dart';
 import 'package:flutter/material.dart';
 import 'gender/gender_field.dart';
 
@@ -18,6 +20,13 @@ class _CvPageState extends State<CvPage> {
   TextEditingController ageController = TextEditingController();
   String? selectedGender = "";
   List<String> selectedSkills = [];
+  List<WorkExperienceData> workExperiences = [];
+
+  void _onTapIcon(WorkExperienceData workExperience) {
+    setState(() {
+      workExperiences.remove(workExperience);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -79,6 +88,40 @@ class _CvPageState extends State<CvPage> {
                   selectedSkills = skill;
                 });
               }),
+              Padding(
+                padding: const EdgeInsets.all(18),
+                child: Row(
+                  children: [
+                    Text("Work Experience"),
+                    Spacer(),
+                    ElevatedButton(
+                      onPressed: () async {
+                        final newWorkExperiencee = await Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => AddWorkExperience(),
+                          ),
+                        );
+                        if (newWorkExperiencee != null) {
+                          setState(() {
+                            workExperiences.add(newWorkExperiencee);
+                          });
+                        }
+                      },
+                      style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all<Color>(
+                            Colors.orange.shade500),
+                      ),
+                      child: Text("Add"),
+                    ),
+                  ],
+                ),
+              ),
+              for (var workExperience in workExperiences)
+                WorkExperienceField(
+                  workExperienceData: workExperience,
+                  deleteOnTap: () => _onTapIcon(workExperience),
+                ),
             ],
           ),
         ),
