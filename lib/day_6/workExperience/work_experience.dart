@@ -66,7 +66,7 @@ class WorkExperienceField extends StatelessWidget {
                         Spacer(),
                         GestureDetector(
                           child: Icon(
-                            Icons.delete,
+                            Icons.delete_sharp,
                             color: Colors.orangeAccent.shade700,
                           ),
                           onTap: deleteOnTap,
