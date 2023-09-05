@@ -16,7 +16,7 @@ class _ChooseSkillsState extends State<ChooseSkills> {
     "Skill-3",
     "Skill-4",
     "Skill-5"
-  ]; // Replace with your options
+  ];
 
   void _toggleOption(String option) {
     setState(() {
