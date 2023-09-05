@@ -44,8 +44,8 @@ class _ChooseSkillsState extends State<ChooseSkills> {
           height: 16,
         ),
         Wrap(
-          spacing: 8.0,
-          runSpacing: 5.0,
+          spacing: 8.5,
+          runSpacing: 2.5,
           children: allOptions.map((option) {
             return Padding(
               padding: const EdgeInsets.all(3.0),

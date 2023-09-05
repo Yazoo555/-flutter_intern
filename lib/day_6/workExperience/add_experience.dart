@@ -35,7 +35,7 @@ class _AddWorkExperienceState extends State<AddWorkExperience> {
               children: [
                 Text(
                   "Job Title",
-                  style: TextStyle(fontWeight: FontWeight.w400, fontSize: 15),
+                  style: TextStyle(fontWeight: FontWeight.w400, fontSize: 16),
                 ),
                 SizedBox(
                   height: 15,
@@ -154,7 +154,7 @@ class _AddWorkExperienceState extends State<AddWorkExperience> {
                         ),
                       ),
                       SizedBox(
-                        height: 10,
+                        height: 15,
                       ),
                       Row(
                         children: [
@@ -218,7 +218,7 @@ class _AddWorkExperienceState extends State<AddWorkExperience> {
                         ),
                       ),
                       SizedBox(
-                        height: 12,
+                        height: 5,
                       ),
                       Align(
                         alignment: Alignment.center,
@@ -251,7 +251,7 @@ class _AddWorkExperienceState extends State<AddWorkExperience> {
                                     size: 45,
                                   ),
                                   shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(17.0),
+                                    borderRadius: BorderRadius.circular(18.0),
                                   ),
                                   iconColor: Colors.white,
                                   titleTextStyle: TextStyle(
