@@ -170,7 +170,10 @@ class _AddWorkExperienceState extends State<AddWorkExperience> {
                         child: Row(
                           children: [
                             GestureDetector(
-                              child: Icon(Icons.calendar_today, size: 40),
+                              child: Icon(
+                                Icons.calendar_today,
+                                size: 40,
+                              ),
                               // splashColor: Colors.blue.shade400,  when used inkwell
                               onTap: () async {
                                 DateTime? pickedDate = await showDatePicker(

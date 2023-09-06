@@ -4,6 +4,8 @@ import 'package:day_6_cv/day_6/skills/choose_skills.dart';
 import 'package:day_6_cv/day_6/workExperience/add_experience.dart';
 import 'package:day_6_cv/day_6/workExperience/work_experience.dart';
 import 'package:flutter/material.dart';
+import 'education/add_edu.dart';
+import 'education/edu_field.dart';
 import 'gender/gender_field.dart';
 
 class CvPage extends StatefulWidget {
@@ -22,9 +24,17 @@ class _CvPageState extends State<CvPage> {
   List<String> selectedSkills = [];
   List<WorkExperienceData> workExperiences = [];
 
+  List<EducationData> educationDatas = [];
+
   void _onTapIcon(WorkExperienceData workExperience) {
     setState(() {
       workExperiences.remove(workExperience);
+    });
+  }
+
+  void _onTapEducation(EducationData educationData) {
+    setState(() {
+      educationDatas.remove(educationData);
     });
   }
 
@@ -92,7 +102,13 @@ class _CvPageState extends State<CvPage> {
                 padding: const EdgeInsets.all(18),
                 child: Row(
                   children: [
-                    Text("Work Experience"),
+                    Text(
+                      "Work Experience",
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
                     Spacer(),
                     ElevatedButton(
                       onPressed: () async {
@@ -128,6 +144,53 @@ class _CvPageState extends State<CvPage> {
                 WorkExperienceField(
                   workExperienceData: workExperience,
                   deleteOnTap: () => _onTapIcon(workExperience),
+                ),
+              Padding(
+                padding: const EdgeInsets.all(18),
+                child: Row(
+                  children: [
+                    Text(
+                      "Education",
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    Spacer(),
+                    ElevatedButton(
+                      style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all<Color>(
+                            Colors.orange.shade500),
+                        shape:
+                            MaterialStateProperty.all<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(
+                                10.0), // Adjust the radius as needed
+                          ),
+                        ),
+                      ),
+                      onPressed: () async {
+                        final newEducationData = await Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => AddEducation(),
+                          ),
+                        );
+                        if (newEducationData != null) {
+                          setState(() {
+                            educationDatas.add(newEducationData);
+                          });
+                        }
+                      },
+                      child: Icon(Icons.add),
+                    ),
+                  ],
+                ),
+              ),
+              for (var educationData in educationDatas)
+                EducationField(
+                  educationData: educationData,
+                  deleteOnTap: () => _onTapEducation(educationData),
                 ),
             ],
           ),
