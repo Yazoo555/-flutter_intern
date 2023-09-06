@@ -249,10 +249,10 @@ class _AddWorkExperienceState extends State<AddWorkExperience> {
                                 context: context,
                                 builder: (context) => AlertDialog(
                                   title: Text("Work Expeirence Added"),
-                                  backgroundColor: Colors.grey.shade300,
+                                  backgroundColor: Colors.purple.shade400,
                                   icon: Icon(
-                                    Icons.check_circle_outline,
-                                    size: 45,
+                                    Icons.check_circle,
+                                    size: 40,
                                   ),
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(18.0),
