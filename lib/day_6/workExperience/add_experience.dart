@@ -159,7 +159,9 @@ class _AddWorkExperienceState extends State<AddWorkExperience> {
                       Row(
                         children: [
                           Text("Start Date"),
-                          Spacer(),
+                          Spacer(
+                            flex: 2,
+                          ),
                           Text("End Date"),
                         ],
                       ),
@@ -185,7 +187,7 @@ class _AddWorkExperienceState extends State<AddWorkExperience> {
                                 });
                               },
                             ),
-                            Spacer(),
+                            Spacer(flex: 2),
                             GestureDetector(
                               child: Icon(Icons.calendar_today, size: 40),
                               // splashColor: Colors.blue.shade400,
@@ -212,7 +214,9 @@ class _AddWorkExperienceState extends State<AddWorkExperience> {
                         child: Row(
                           children: [
                             Text(_startDate),
-                            Spacer(),
+                            Spacer(
+                              flex: 2,
+                            ),
                             Text(_endDate),
                           ],
                         ),
@@ -225,7 +229,7 @@ class _AddWorkExperienceState extends State<AddWorkExperience> {
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.orange.shade500,
-                              fixedSize: const Size(200, 50),
+                              fixedSize: const Size(180, 50),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(18.0),
                               )),
@@ -245,7 +249,7 @@ class _AddWorkExperienceState extends State<AddWorkExperience> {
                                 context: context,
                                 builder: (context) => AlertDialog(
                                   title: Text("Work Expeirence Added"),
-                                  backgroundColor: Colors.blueGrey,
+                                  backgroundColor: Colors.grey.shade300,
                                   icon: Icon(
                                     Icons.check_circle_outline,
                                     size: 45,
