@@ -43,16 +43,17 @@ class _CvPageState extends State<CvPage> {
     return Scaffold(
       backgroundColor: Colors.grey.shade100,
       appBar: AppBar(
+        backgroundColor: Colors.blue.shade400,
         title: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(5.0),
           child: Text(
             "C.V",
             style: TextStyle(
-              fontSize: 22,
+              fontSize: 23,
             ),
           ),
         ),
-        elevation: .55,
+        elevation: .5,
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -62,8 +63,8 @@ class _CvPageState extends State<CvPage> {
               Text(
                 "Curriculum Vitae",
                 style: TextStyle(
-                    fontSize: 30,
-                    fontWeight: FontWeight.w400,
+                    fontSize: 35,
+                    fontWeight: FontWeight.w500,
                     color: Colors.deepOrangeAccent),
               ),
               const SizedBox(
@@ -135,7 +136,7 @@ class _CvPageState extends State<CvPage> {
                           ),
                         ),
                       ),
-                      child: Text("Add"),
+                      child: Text("ADD"),
                     ),
                   ],
                 ),
@@ -182,7 +183,7 @@ class _CvPageState extends State<CvPage> {
                           });
                         }
                       },
-                      child: Icon(Icons.add),
+                      child: Text("ADD"),
                     ),
                   ],
                 ),
