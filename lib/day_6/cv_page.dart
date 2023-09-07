@@ -1,4 +1,5 @@
 import 'package:day_6_cv/day_6/age/age_field.dart';
+import 'package:day_6_cv/day_6/language/lang.dart';
 import 'package:day_6_cv/day_6/name/all_name_field.dart';
 import 'package:day_6_cv/day_6/project/add_proj.dart';
 import 'package:day_6_cv/day_6/project/pro_field.dart';
@@ -26,6 +27,7 @@ class _CvPageState extends State<CvPage> {
   List<String> selectedSkills = [];
   List<WorkExperienceData> workExperiences = [];
   List<EducationData> educationDatas = [];
+  List<String> selectedLanguage = [];
   ValueNotifier<bool> _valueNotifier = ValueNotifier(false);
   List<ProjectData> projectDatas = [];
 
@@ -255,6 +257,16 @@ class _CvPageState extends State<CvPage> {
                   projectData: projectData,
                   projectOnTap: () => _onTapProject(projectData),
                 ),
+              SizedBox(
+                height: 8,
+              ),
+              LanguageField(
+                onLanguagesChanged: (languages) {
+                  setState(() {
+                    selectedLanguage = languages;
+                  });
+                },
+              ),
             ],
           ),
         ),
