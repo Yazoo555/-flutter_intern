@@ -63,7 +63,7 @@ class _CvPageState extends State<CvPage> {
           ),
         ),
         elevation: .5,
-        toolbarHeight: 48.0,
+        toolbarHeight: 40.0,
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -223,7 +223,7 @@ class _CvPageState extends State<CvPage> {
                     valueListenable: _valueNotifier,
                     builder: (BuildContext context, bool value, Widget? child) {
                       return Padding(
-                        padding: const EdgeInsets.only(right: 20),
+                        padding: const EdgeInsets.only(right: 22),
                         child: Switch(
                           value: value,
                           onChanged: (bool newValue) async {
