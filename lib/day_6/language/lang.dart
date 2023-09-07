@@ -23,10 +23,6 @@ class _LanguageFieldState extends State<LanguageField> {
       'name': 'Hindi',
       'isChecked': false,
     },
-    {
-      'name': 'Arabic',
-      'isChecked': false,
-    },
   ];
   @override
   Widget build(BuildContext context) {
