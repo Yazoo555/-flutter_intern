@@ -1,4 +1,5 @@
 import 'package:day_6_cv/day_6/age/age_field.dart';
+import 'package:day_6_cv/day_6/intrests%20Area/intrests.dart';
 import 'package:day_6_cv/day_6/language/lang.dart';
 import 'package:day_6_cv/day_6/name/all_name_field.dart';
 import 'package:day_6_cv/day_6/project/add_proj.dart';
@@ -28,6 +29,7 @@ class _CvPageState extends State<CvPage> {
   List<WorkExperienceData> workExperiences = [];
   List<EducationData> educationDatas = [];
   List<String> selectedLanguage = [];
+  List<String> selectedAreas = [];
   ValueNotifier<bool> _valueNotifier = ValueNotifier(false);
   List<ProjectData> projectDatas = [];
 
@@ -267,6 +269,13 @@ class _CvPageState extends State<CvPage> {
                   });
                 },
               ),
+
+              InterestArea(
+                onInterestArea: (areas) {
+                  selectedAreas = areas;
+                },
+              ),
+              //
             ],
           ),
         ),
