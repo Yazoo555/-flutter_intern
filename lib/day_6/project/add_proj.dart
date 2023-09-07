@@ -199,7 +199,7 @@ class _AddOtherProjectState extends State<AddOtherProject> {
                     ),
                     Row(
                       children: [
-                        Text("Any Organization Linked ?",
+                        Text("Linked With Organization ?",
                             style: TextStyle(
                                 fontWeight: FontWeight.w400, fontSize: 16)),
                         Radio(
@@ -281,7 +281,7 @@ class _AddOtherProjectState extends State<AddOtherProject> {
                       ),
                     ),
                     const SizedBox(
-                      height: 10.0,
+                      height: 25.0,
                     ),
                     Align(
                       alignment: Alignment.center,
