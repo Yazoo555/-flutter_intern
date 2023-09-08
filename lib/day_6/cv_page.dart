@@ -1,13 +1,18 @@
+import 'dart:convert';
+
+import 'package:day_6_cv/Svd_data.dart';
 import 'package:day_6_cv/day_6/age/age_field.dart';
 import 'package:day_6_cv/day_6/intrests%20Area/intrests.dart';
 import 'package:day_6_cv/day_6/language/lang.dart';
 import 'package:day_6_cv/day_6/name/all_name_field.dart';
 import 'package:day_6_cv/day_6/project/add_proj.dart';
 import 'package:day_6_cv/day_6/project/pro_field.dart';
+import 'package:day_6_cv/day_6/shared_Pref/shared_model.dart';
 import 'package:day_6_cv/day_6/skills/choose_skills.dart';
 import 'package:day_6_cv/day_6/workExperience/add_experience.dart';
 import 'package:day_6_cv/day_6/workExperience/work_experience.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'education/add_edu.dart';
 import 'education/edu_field.dart';
 import 'gender/gender_field.dart';
@@ -32,6 +37,8 @@ class _CvPageState extends State<CvPage> {
   List<String> selectedAreas = [];
   ValueNotifier<bool> _valueNotifier = ValueNotifier(false);
   List<ProjectData> projectDatas = [];
+  final GlobalKey<FormState> _key = GlobalKey<FormState>();
+  List<CvData> cvDataList = [];
 
   void _onTapIcon(WorkExperienceData workExperience) {
     setState(() {
@@ -48,6 +55,66 @@ class _CvPageState extends State<CvPage> {
   void _onTapProject(ProjectData projectData) {
     setState(() {
       projectDatas.remove(projectData);
+    });
+  }
+
+  CvData _prepareCvData() {
+    final cvData = CvData(
+      id: DateTime.now().toString(),
+      firstName: firstNameController.text,
+      middleName: middleNameController.text,
+      lastName: lastNameController.text,
+      age: int.tryParse(ageController.text) ?? 0,
+      gender: selectedGender,
+      skills: selectedSkills,
+      workExperiences: workExperiences,
+      projectDatas: projectDatas,
+      educationDatas: educationDatas,
+    );
+    return cvData;
+  }
+
+  void _resetForm() {
+    firstNameController.clear();
+    middleNameController.clear();
+    lastNameController.clear();
+    ageController.clear();
+    selectedGender = null;
+    selectedSkills.clear();
+    selectedLanguage.clear();
+    selectedAreas.clear();
+    setState(() {
+      workExperiences.clear();
+      educationDatas.clear();
+      projectDatas.clear();
+    });
+  }
+
+  Future<void> _saveData() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    final cvData = _prepareCvData();
+    cvData.languages = selectedLanguage;
+    cvData.interestAreas = selectedAreas;
+    final jsonString = prefs.getString('cvData');
+    List<CvData> cvDataList = [];
+    if (jsonString != null) {
+      try {
+        final jsonData = jsonDecode(jsonString);
+        if (jsonData is List<dynamic>) {
+          cvDataList = jsonData.map((json) => CvData.fromJson(json)).toList();
+        } else if (jsonData is Map<String, dynamic>) {
+          cvDataList.add(CvData.fromJson(jsonData));
+        }
+      } catch (e) {
+        print("Error data: $e");
+      }
+    }
+    cvDataList.add(cvData);
+    final jsonStringToSave =
+        jsonEncode(cvDataList.map((cvData) => cvData.toJson()).toList());
+    await prefs.setString('cvData', jsonStringToSave);
+    setState(() {
+      this.cvDataList = cvDataList;
     });
   }
 
@@ -275,7 +342,71 @@ class _CvPageState extends State<CvPage> {
                   selectedAreas = areas;
                 },
               ),
+
               //
+//
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.orange.shade700,
+                  fixedSize: Size(150, 45),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(18.0),
+                  ),
+                ),
+                onPressed: () async {
+                  if (_key.currentState!.validate()) {
+                    await _saveData();
+                    // ignore: use_build_context_synchronously
+                    showDialog(
+                      context: context,
+                      builder: (context) => AlertDialog(
+                        title: Text("Your Data has been saved Successfully"),
+                        backgroundColor: Colors.purple.shade400,
+                        icon: Icon(
+                          Icons.check_circle_outline,
+                          size: 45,
+                        ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(17.0),
+                        ),
+                        iconColor: Colors.white,
+                        titleTextStyle:
+                            TextStyle(color: Colors.white, fontSize: 25),
+                      ),
+                    );
+                    _resetForm();
+                  }
+                },
+                child: Text(
+                  "Save",
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                ),
+              ),
+
+              const SizedBox(
+                height: 25,
+              ),
+
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.black,
+                    fixedSize: Size(200, 45),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(18.0),
+                    )),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => SavedData(),
+                    ),
+                  );
+                },
+                child: Text(
+                  "View Data",
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                ),
+              ),
             ],
           ),
         ),
