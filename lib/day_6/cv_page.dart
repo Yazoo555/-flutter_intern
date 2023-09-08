@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:day_6_cv/Svd_data.dart';
 import 'package:day_6_cv/day_6/age/age_field.dart';
 import 'package:day_6_cv/day_6/intrests%20Area/intrests.dart';
@@ -18,7 +17,7 @@ import 'education/edu_field.dart';
 import 'gender/gender_field.dart';
 
 class CvPage extends StatefulWidget {
-  CvPage({super.key});
+  const CvPage({Key? key}) : super(key: key);
 
   @override
   State<CvPage> createState() => _CvPageState();
@@ -58,22 +57,6 @@ class _CvPageState extends State<CvPage> {
     });
   }
 
-  CvData _prepareCvData() {
-    final cvData = CvData(
-      id: DateTime.now().toString(),
-      firstName: firstNameController.text,
-      middleName: middleNameController.text,
-      lastName: lastNameController.text,
-      age: int.tryParse(ageController.text) ?? 0,
-      gender: selectedGender,
-      skills: selectedSkills,
-      workExperiences: workExperiences,
-      projectDatas: projectDatas,
-      educationDatas: educationDatas,
-    );
-    return cvData;
-  }
-
   void _resetForm() {
     firstNameController.clear();
     middleNameController.clear();
@@ -88,6 +71,22 @@ class _CvPageState extends State<CvPage> {
       educationDatas.clear();
       projectDatas.clear();
     });
+  }
+
+  CvData _prepareCvData() {
+    final cvData = CvData(
+      id: DateTime.now().toString(),
+      firstName: firstNameController.text,
+      middleName: middleNameController.text,
+      lastName: lastNameController.text,
+      age: int.tryParse(ageController.text) ?? 0,
+      gender: selectedGender,
+      skills: selectedSkills,
+      workExperiences: workExperiences,
+      projectDatas: projectDatas,
+      educationDatas: educationDatas,
+    );
+    return cvData;
   }
 
   Future<void> _saveData() async {
@@ -139,275 +138,282 @@ class _CvPageState extends State<CvPage> {
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(4.0),
-          child: Column(
-            children: [
-              Text(
-                "Curriculum Vitae",
-                style: TextStyle(
-                    fontSize: 35,
-                    fontWeight: FontWeight.w500,
-                    color: Colors.deepOrangeAccent),
-              ),
-              const SizedBox(
-                height: 8,
-              ),
-              AllNameField(
-                  name: "First Name",
-                  controller: firstNameController,
-                  hintText: "First-Name"),
-              AllNameField(
-                  name: "Middle Name",
-                  controller: middleNameController,
-                  hintText: "Middle-Name"),
-              AllNameField(
-                  name: "Last Name",
-                  controller: lastNameController,
-                  hintText: "Last-Name"),
-              AgeField(
-                hintText: "Age",
-                ageController: ageController,
-              ),
-              GenderField(
-                onGenderChanged: (gender) {
+          child: Form(
+            key: _key,
+
+            // key has been added here for the validation of Form for Save button
+
+            child: Column(
+              children: [
+                Text(
+                  "Curriculum Vitae",
+                  style: TextStyle(
+                      fontSize: 35,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.deepOrangeAccent),
+                ),
+                const SizedBox(
+                  height: 8,
+                ),
+                AllNameField(
+                    name: "First Name",
+                    controller: firstNameController,
+                    hintText: "First-Name"),
+                AllNameField(
+                    name: "Middle Name",
+                    controller: middleNameController,
+                    hintText: "Middle-Name"),
+                AllNameField(
+                    name: "Last Name",
+                    controller: lastNameController,
+                    hintText: "Last-Name"),
+                AgeField(
+                  hintText: "Age",
+                  ageController: ageController,
+                ),
+                GenderField(
+                  onGenderChanged: (gender) {
+                    setState(() {
+                      selectedGender = gender;
+                    });
+                  },
+                  selectedGender: selectedGender,
+                ),
+                ChooseSkills(onSkillChanged: (skill) {
                   setState(() {
-                    selectedGender = gender;
+                    selectedSkills = skill;
                   });
-                },
-                selectedGender: selectedGender,
-              ),
-              ChooseSkills(onSkillChanged: (skill) {
-                setState(() {
-                  selectedSkills = skill;
-                });
-              }),
-              Padding(
-                padding: const EdgeInsets.all(18),
-                child: Row(
-                  children: [
-                    Text(
-                      "Work Experience",
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                    Spacer(),
-                    ElevatedButton(
-                      onPressed: () async {
-                        final newWorkExperiencee = await Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => AddWorkExperience(),
-                          ),
-                        );
-                        if (newWorkExperiencee != null) {
-                          setState(() {
-                            workExperiences.add(newWorkExperiencee);
-                          });
-                        }
-                      },
-                      style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all<Color>(
-                            Colors.orange.shade500),
-                        shape:
-                            MaterialStateProperty.all<RoundedRectangleBorder>(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(
-                                10.0), // Adjust the radius as needed
-                          ),
+                }),
+                Padding(
+                  padding: const EdgeInsets.all(18),
+                  child: Row(
+                    children: [
+                      Text(
+                        "Work Experience",
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
                         ),
                       ),
-                      child: Text("ADD"),
-                    ),
-                  ],
-                ),
-              ),
-              for (var workExperience in workExperiences)
-                WorkExperienceField(
-                  workExperienceData: workExperience,
-                  deleteOnTap: () => _onTapIcon(workExperience),
-                ),
-              Padding(
-                padding: const EdgeInsets.all(18),
-                child: Row(
-                  children: [
-                    Text(
-                      "Education",
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                    Spacer(),
-                    ElevatedButton(
-                      style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all<Color>(
-                            Colors.orange.shade500),
-                        shape:
-                            MaterialStateProperty.all<RoundedRectangleBorder>(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(
-                                10.0), // Adjust the radius as needed
+                      Spacer(),
+                      ElevatedButton(
+                        onPressed: () async {
+                          final newWorkExperiencee = await Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => AddWorkExperience(),
+                            ),
+                          );
+                          if (newWorkExperiencee != null) {
+                            setState(() {
+                              workExperiences.add(newWorkExperiencee);
+                            });
+                          }
+                        },
+                        style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all<Color>(
+                              Colors.orange.shade500),
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(
+                                  10.0), // Adjust the radius as needed
+                            ),
                           ),
                         ),
+                        child: Text("ADD"),
                       ),
-                      onPressed: () async {
-                        final newEducationData = await Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => AddEducation(),
-                          ),
-                        );
-                        if (newEducationData != null) {
-                          setState(() {
-                            educationDatas.add(newEducationData);
-                          });
-                        }
-                      },
-                      child: Text("ADD"),
-                    ),
-                  ],
-                ),
-              ),
-              for (var educationData in educationDatas)
-                EducationField(
-                  educationData: educationData,
-                  deleteOnTap: () => _onTapEducation(educationData),
-                ),
-              SizedBox(
-                height: 10,
-              ),
-              Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(16),
-                    child: Text(
-                      "Other Projects",
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
+                    ],
                   ),
-                  Spacer(),
-                  ValueListenableBuilder(
-                    valueListenable: _valueNotifier,
-                    builder: (BuildContext context, bool value, Widget? child) {
-                      return Padding(
-                        padding: const EdgeInsets.only(right: 22),
-                        child: Switch(
-                          value: value,
-                          onChanged: (bool newValue) async {
-                            _valueNotifier.value = newValue;
-                            if (newValue) {
-                              final newProjects = await Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => AddOtherProject(),
-                                ),
-                              );
-                              if (newProjects != null) {
-                                setState(() {
-                                  projectDatas.add(newProjects);
-                                  _valueNotifier.value = false;
-                                });
+                ),
+                for (var workExperience in workExperiences)
+                  WorkExperienceField(
+                    workExperienceData: workExperience,
+                    deleteOnTap: () => _onTapIcon(workExperience),
+                  ),
+                Padding(
+                  padding: const EdgeInsets.all(18),
+                  child: Row(
+                    children: [
+                      Text(
+                        "Education",
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      Spacer(),
+                      ElevatedButton(
+                        style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all<Color>(
+                              Colors.orange.shade500),
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(
+                                  10.0), // Adjust the radius as needed
+                            ),
+                          ),
+                        ),
+                        onPressed: () async {
+                          final newEducationData = await Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => AddEducation(),
+                            ),
+                          );
+                          if (newEducationData != null) {
+                            setState(() {
+                              educationDatas.add(newEducationData);
+                            });
+                          }
+                        },
+                        child: Text("ADD"),
+                      ),
+                    ],
+                  ),
+                ),
+                for (var educationData in educationDatas)
+                  EducationField(
+                    educationData: educationData,
+                    deleteOnTap: () => _onTapEducation(educationData),
+                  ),
+                SizedBox(
+                  height: 10,
+                ),
+                Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(16),
+                      child: Text(
+                        "Other Projects",
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ),
+                    Spacer(),
+                    ValueListenableBuilder(
+                      valueListenable: _valueNotifier,
+                      builder:
+                          (BuildContext context, bool value, Widget? child) {
+                        return Padding(
+                          padding: const EdgeInsets.only(right: 22),
+                          child: Switch(
+                            value: value,
+                            onChanged: (bool newValue) async {
+                              _valueNotifier.value = newValue;
+                              if (newValue) {
+                                final newProjects = await Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => AddOtherProject(),
+                                  ),
+                                );
+                                if (newProjects != null) {
+                                  setState(() {
+                                    projectDatas.add(newProjects);
+                                    _valueNotifier.value = false;
+                                  });
+                                }
                               }
-                            }
-                          },
-                          activeColor: Colors.orangeAccent.shade400,
-                        ),
-                      );
-                    },
+                            },
+                            activeColor: Colors.orangeAccent.shade400,
+                          ),
+                        );
+                      },
+                    ),
+                  ],
+                ),
+                for (var projectData in projectDatas)
+                  ProjectField(
+                    projectData: projectData,
+                    projectOnTap: () => _onTapProject(projectData),
                   ),
-                ],
-              ),
-              for (var projectData in projectDatas)
-                ProjectField(
-                  projectData: projectData,
-                  projectOnTap: () => _onTapProject(projectData),
+                SizedBox(
+                  height: 8,
                 ),
-              SizedBox(
-                height: 8,
-              ),
-              LanguageField(
-                onLanguagesChanged: (languages) {
-                  setState(() {
-                    selectedLanguage = languages;
-                  });
-                },
-              ),
-
-              InterestArea(
-                onInterestArea: (areas) {
-                  selectedAreas = areas;
-                },
-              ),
-
-              //
-//
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.orange.shade700,
-                  fixedSize: Size(150, 45),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(18.0),
-                  ),
+                LanguageField(
+                  onLanguagesChanged: (languages) {
+                    setState(() {
+                      selectedLanguage = languages;
+                    });
+                  },
                 ),
-                onPressed: () async {
-                  if (_key.currentState!.validate()) {
-                    await _saveData();
-                    // ignore: use_build_context_synchronously
-                    showDialog(
-                      context: context,
-                      builder: (context) => AlertDialog(
-                        title: Text("Your Data has been saved Successfully"),
-                        backgroundColor: Colors.purple.shade400,
-                        icon: Icon(
-                          Icons.check_circle_outline,
-                          size: 45,
-                        ),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(17.0),
-                        ),
-                        iconColor: Colors.white,
-                        titleTextStyle:
-                            TextStyle(color: Colors.white, fontSize: 25),
-                      ),
-                    );
-                    _resetForm();
-                  }
-                },
-                child: Text(
-                  "Save",
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+
+                InterestArea(
+                  onInterestArea: (areas) {
+                    selectedAreas = areas;
+                  },
                 ),
-              ),
 
-              const SizedBox(
-                height: 25,
-              ),
-
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.black,
-                    fixedSize: Size(200, 45),
+                //
+                //
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.orange.shade700,
+                    fixedSize: Size(150, 45),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(18.0),
-                    )),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => SavedData(),
                     ),
-                  );
-                },
-                child: Text(
-                  "View Data",
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
+                  onPressed: () async {
+                    if (_key.currentState!.validate()) {
+                      await _saveData();
+                      // ignore: use_build_context_synchronously
+                      showDialog(
+                        context: context,
+                        builder: (context) => AlertDialog(
+                          title: Text("Your Data has been saved Successfully"),
+                          backgroundColor: Colors.purple.shade400,
+                          icon: Icon(
+                            Icons.check_circle_outline,
+                            size: 45,
+                          ),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(17.0),
+                          ),
+                          iconColor: Colors.white,
+                          titleTextStyle:
+                              TextStyle(color: Colors.white, fontSize: 25),
+                        ),
+                      );
+                      _resetForm();
+                    }
+                  },
+                  child: Text(
+                    "Save",
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
                 ),
-              ),
-            ],
+
+                const SizedBox(
+                  height: 25,
+                ),
+
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.black,
+                      fixedSize: Size(200, 45),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(18.0),
+                      )),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => SavedData(),
+                      ),
+                    );
+                  },
+                  child: Text(
+                    "View Data",
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
