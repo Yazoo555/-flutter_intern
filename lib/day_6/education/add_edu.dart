@@ -196,6 +196,7 @@ class _AddEducationState extends State<AddEducation> {
                       height: 10,
                     ),
                     TextFormField(
+                      controller: acheivementController,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return "Enter Your Acheivements";
