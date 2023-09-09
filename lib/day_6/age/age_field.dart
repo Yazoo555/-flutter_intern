@@ -18,6 +18,7 @@ class AgeField extends StatelessWidget {
             height: 8.0,
           ),
           TextFormField(
+            controller: ageController,
             keyboardType: TextInputType.number,
             validator: (value) {
               if (value == null || value.isEmpty) {
