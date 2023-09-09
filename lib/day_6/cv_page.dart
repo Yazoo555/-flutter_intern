@@ -140,7 +140,6 @@ class _CvPageState extends State<CvPage> {
           padding: const EdgeInsets.all(4.0),
           child: Form(
             key: _key,
-
             // key has been added here for the validation of Form for Save button
 
             child: Column(
