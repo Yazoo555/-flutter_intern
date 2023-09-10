@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 
 class InterestArea extends StatefulWidget {
   final Function(List<String>) onInterestArea;
-  const InterestArea({required this.onInterestArea, Key? key})
-      : super(key: key);
+  const InterestArea({
+    required this.onInterestArea,
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<InterestArea> createState() => _InterestAreaState();

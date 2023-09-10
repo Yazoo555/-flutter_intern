@@ -3,8 +3,12 @@ import 'package:flutter/material.dart';
 class AgeField extends StatelessWidget {
   final String hintText;
   final TextEditingController ageController;
-  const AgeField(
-      {required this.hintText, required this.ageController, super.key});
+
+  const AgeField({
+    required this.hintText,
+    required this.ageController,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

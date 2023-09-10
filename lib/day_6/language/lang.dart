@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 
 class LanguageField extends StatefulWidget {
   final Function(List<String>) onLanguagesChanged;
-  const LanguageField({required this.onLanguagesChanged, Key? key})
-      : super(key: key);
+
+  const LanguageField({
+    required this.onLanguagesChanged,
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<LanguageField> createState() => _LanguageFieldState();
@@ -42,32 +45,34 @@ class _LanguageFieldState extends State<LanguageField> {
                 ),
               ),
             ),
+            //
             SingleChildScrollView(
               scrollDirection: Axis.vertical,
               child: Row(
                 children: availableLanguage.map((language) {
                   return Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Checkbox(
-                          activeColor: Colors.orangeAccent.shade700,
-                          value: language['isChecked'],
-                          onChanged: (newValue) {
-                            setState(() {
-                              language['isChecked'] = newValue;
-                              final selectedLanguages = availableLanguage
-                                  .where((language) => language['isChecked'])
-                                  .map((language) => language['name'])
-                                  .toList()
-                                  .cast<String>();
-                              widget.onLanguagesChanged(selectedLanguages);
-                            });
-                          },
-                        ),
-                        Text(
-                          language['name'],
-                        )
-                      ]);
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Checkbox(
+                        activeColor: Colors.orangeAccent.shade700,
+                        value: language['isChecked'],
+                        onChanged: (newValue) {
+                          setState(() {
+                            language['isChecked'] = newValue;
+                            final selectedLanguages = availableLanguage
+                                .where((language) => language['isChecked'])
+                                .map((language) => language['name'])
+                                .toList()
+                                .cast<String>();
+                            widget.onLanguagesChanged(selectedLanguages);
+                          });
+                        },
+                      ),
+                      Text(
+                        language['name'],
+                      )
+                    ],
+                  );
                 }).toList(),
               ),
             ),
