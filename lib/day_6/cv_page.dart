@@ -34,7 +34,7 @@ class _CvPageState extends State<CvPage> {
   List<EducationData> educationDatas = [];
   List<String> selectedLanguage = [];
   List<String> selectedAreas = [];
-  ValueNotifier<bool> _valueNotifier = ValueNotifier(false);
+  final ValueNotifier<bool> _valueNotifier = ValueNotifier(false);
   List<ProjectData> projectDatas = [];
   final GlobalKey<FormState> _key = GlobalKey<FormState>();
   List<CvData> cvDataList = [];
