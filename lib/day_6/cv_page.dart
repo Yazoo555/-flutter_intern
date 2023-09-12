@@ -196,6 +196,8 @@ class _CvPageState extends State<CvPage> {
                         ),
                       ),
                       Spacer(),
+                      //
+
                       ElevatedButton(
                         onPressed: () async {
                           final newWorkExperiencee = await Navigator.push(
@@ -231,6 +233,9 @@ class _CvPageState extends State<CvPage> {
                     workExperienceData: workExperience,
                     deleteOnTap: () => _onTapIcon(workExperience),
                   ),
+
+//
+
                 Padding(
                   padding: const EdgeInsets.all(18),
                   child: Row(
@@ -278,6 +283,9 @@ class _CvPageState extends State<CvPage> {
                     educationData: educationData,
                     deleteOnTap: () => _onTapEducation(educationData),
                   ),
+
+//
+
                 SizedBox(
                   height: 10,
                 ),

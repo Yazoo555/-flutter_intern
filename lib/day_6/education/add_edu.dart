@@ -98,7 +98,7 @@ class _AddEducationState extends State<AddEducation> {
 
                         DropdownButton(
                           value: _dropDownValue,
-                          elevation: 2,
+                          elevation: 1,
                           dropdownColor: Colors.grey.shade200,
                           onChanged: (String? newValue) {
                             setState(() {
@@ -145,9 +145,11 @@ class _AddEducationState extends State<AddEducation> {
                               String formattedDate =
                                   DateFormat(DateFormat.YEAR_MONTH_DAY)
                                       .format(pickedDate!);
-                              setState(() {
-                                _eStartDate = formattedDate.toString();
-                              });
+                              setState(
+                                () {
+                                  _eStartDate = formattedDate.toString();
+                                },
+                              );
                             },
                           ),
                           Spacer(

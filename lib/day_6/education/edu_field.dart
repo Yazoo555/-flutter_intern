@@ -37,9 +37,11 @@ class EducationData {
 class EducationField extends StatelessWidget {
   final EducationData? educationData;
   final VoidCallback deleteOnTap;
-  const EducationField(
-      {this.educationData, required this.deleteOnTap, Key? key})
-      : super(key: key);
+  const EducationField({
+    this.educationData,
+    required this.deleteOnTap,
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
