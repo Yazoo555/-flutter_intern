@@ -236,32 +236,47 @@ class _SavedDataState extends State<SavedData> {
                               ),
                             ),
                           ),
-                          Text("Languages: ${cvData.languages.join(',')}"),
                           Text(
-                              "Interested Areas: ${cvData.interestAreas.join(',')}"),
+                            "Languages: ${cvData.languages.join(',')}",
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          Text(
+                            "Interested Areas: ${cvData.interestAreas.join(',')}",
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
                           SizedBox(
                             height: 25,
                           ),
-                          Padding(
-                            padding: const EdgeInsets.all(12.0),
-                            child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.red,
-                                elevation: 4.0,
-                                fixedSize: Size(130, 50),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(12),
+                          Column(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(12.0),
+                                child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: Colors.red,
+                                    elevation: 4.0,
+                                    fixedSize: Size(130, 50),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(12),
+                                    ),
+                                  ),
+                                  onPressed: _deleteSaveData,
+                                  child: Text(
+                                    "Delete Data",
+                                    style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
                                 ),
-                              ),
-                              onPressed: _deleteSaveData,
-                              child: Text(
-                                "Delete Data",
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
+                              )
+                            ],
                           )
                         ],
                       ),

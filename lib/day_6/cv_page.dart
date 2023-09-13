@@ -357,6 +357,10 @@ class _CvPageState extends State<CvPage> {
                 ),
 
                 //
+
+                SizedBox(
+                  height: 20,
+                ),
                 //
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
