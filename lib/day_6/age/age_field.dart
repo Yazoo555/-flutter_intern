@@ -37,7 +37,7 @@ class AgeField extends StatelessWidget {
             decoration: InputDecoration(
               hintText: hintText,
               enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: Colors.black),
+                borderSide: const BorderSide(color: Colors.black),
                 borderRadius: BorderRadius.circular(12.0),
               ),
               focusedBorder: OutlineInputBorder(
@@ -45,11 +45,11 @@ class AgeField extends StatelessWidget {
                 borderRadius: BorderRadius.circular(12.0),
               ),
               errorBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: Colors.black),
+                borderSide: const BorderSide(color: Colors.black),
                 borderRadius: BorderRadius.circular(12.0),
               ),
               focusedErrorBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: Colors.black),
+                borderSide: const BorderSide(color: Colors.black),
                 borderRadius: BorderRadius.circular(12.0),
               ),
             ),

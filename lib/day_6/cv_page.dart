@@ -123,8 +123,8 @@ class _CvPageState extends State<CvPage> {
       backgroundColor: Colors.grey.shade100,
       appBar: AppBar(
         backgroundColor: Colors.grey.shade500,
-        title: Padding(
-          padding: const EdgeInsets.all(4.0),
+        title: const Padding(
+          padding: EdgeInsets.all(4.0),
           child: Text(
             "C.V",
             style: TextStyle(
@@ -146,7 +146,7 @@ class _CvPageState extends State<CvPage> {
               children: [
                 Text(
                   "Curriculum Vitae",
-                  style: TextStyle(
+                  style: const TextStyle(
                       fontSize: 35,
                       fontWeight: FontWeight.w500,
                       color: Colors.deepOrangeAccent),
