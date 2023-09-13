@@ -23,31 +23,19 @@ class _SavedDataState extends State<SavedData> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text("Displaying Saved Data"),
-          actions: [
-            Padding(
-              padding: const EdgeInsets.only(right: 8.0),
-              child: GestureDetector(
-                child: Icon(
-                  Icons.delete,
-                  color: Colors.orange.shade700,
-                  size: 35,
-                ),
-                onTap: _deleteSaveData,
-              ),
-            )
-          ],
-          elevation: 0,
-          centerTitle: true,
-          backgroundColor: Colors.black,
-        ),
-        body: SingleChildScrollView(
-            child:
-                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Container(
-            height: 670,
-            child: ListView.builder(
+      appBar: AppBar(
+        title: Text("User Saved Data"),
+        elevation: 0,
+        centerTitle: true,
+        backgroundColor: Colors.black,
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              height: 670,
+              child: ListView.builder(
                 scrollDirection: Axis.vertical,
                 itemCount: cvFullData.length,
                 itemBuilder: (context, index) {
@@ -55,9 +43,10 @@ class _SavedDataState extends State<SavedData> {
                   return Padding(
                     padding: const EdgeInsets.all(4.0),
                     child: Container(
-                        decoration: BoxDecoration(
-                            border: Border.all(color: Colors.black)),
-                        child: Column(children: [
+                      decoration: BoxDecoration(
+                          border: Border.all(color: Colors.black)),
+                      child: Column(
+                        children: [
                           Text(
                             "USER ${index + 1}",
                             style: TextStyle(
@@ -249,11 +238,41 @@ class _SavedDataState extends State<SavedData> {
                           Text("Languages: ${cvData.languages.join(',')}"),
                           Text(
                               "Interested Areas: ${cvData.interestAreas.join(',')}"),
-                        ])),
+                          SizedBox(
+                            height: 25,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(12.0),
+                            child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                primary: Colors.red,
+                                elevation: 4.0,
+                                fixedSize: Size(130, 50),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                              ),
+                              onPressed: _deleteSaveData,
+                              child: Text(
+                                "Delete Data",
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
                   );
-                }),
-          ),
-        ])));
+                },
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 
   Future<List<CvData>> _loadSaveData() async {

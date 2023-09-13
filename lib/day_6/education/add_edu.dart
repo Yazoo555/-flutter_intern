@@ -117,23 +117,14 @@ class _AddEducationState extends State<AddEducation> {
                     SizedBox(
                       height: 15,
                     ),
-                    Row(
-                      children: [
-                        Text("Start Date"),
-                        Spacer(
-                          flex: 2,
-                        ),
-                        Text("End Date"),
-                      ],
-                    ),
                     Padding(
-                      padding: const EdgeInsets.all(22.0),
-                      child: Row(
+                      padding: const EdgeInsets.all(18.0),
+                      child: Column(
                         children: [
                           GestureDetector(
                             child: Icon(
                               Icons.calendar_today,
-                              size: 50,
+                              size: 40,
                             ),
                             onTap: () async {
                               DateTime? pickedDate = await showDatePicker(
@@ -152,13 +143,18 @@ class _AddEducationState extends State<AddEducation> {
                               );
                             },
                           ),
-                          Spacer(
-                            flex: 2,
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Text("Start Date:"),
+                          Text(_eStartDate),
+                          SizedBox(
+                            height: 30,
                           ),
                           GestureDetector(
                             child: Icon(
                               Icons.calendar_today,
-                              size: 50,
+                              size: 40,
                             ),
                             onTap: () async {
                               DateTime? endDatePicked = await showDatePicker(
@@ -175,17 +171,10 @@ class _AddEducationState extends State<AddEducation> {
                               });
                             },
                           ),
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(4.0),
-                      child: Row(
-                        children: [
-                          Text(_eStartDate),
-                          Spacer(
-                            flex: 2,
+                          SizedBox(
+                            height: 10,
                           ),
+                          Text("End Date:"),
                           Text(_eEndDate),
                         ],
                       ),

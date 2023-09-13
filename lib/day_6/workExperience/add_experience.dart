@@ -156,18 +156,9 @@ class _AddWorkExperienceState extends State<AddWorkExperience> {
                       SizedBox(
                         height: 15,
                       ),
-                      Row(
-                        children: [
-                          Text("Start Date"),
-                          Spacer(
-                            flex: 2,
-                          ),
-                          Text("End Date"),
-                        ],
-                      ),
                       Padding(
                         padding: const EdgeInsets.all(18.0),
-                        child: Row(
+                        child: Column(
                           children: [
                             GestureDetector(
                               child: Icon(
@@ -190,9 +181,19 @@ class _AddWorkExperienceState extends State<AddWorkExperience> {
                                 });
                               },
                             ),
-                            Spacer(flex: 2),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Text("Start Date:"),
+                            Text(_startDate),
+                            SizedBox(
+                              height: 30,
+                            ),
                             GestureDetector(
-                              child: Icon(Icons.calendar_today, size: 40),
+                              child: Icon(
+                                Icons.calendar_today,
+                                size: 40,
+                              ),
                               // splashColor: Colors.blue.shade400,
                               onTap: () async {
                                 DateTime? pickedDate = await showDatePicker(
@@ -209,20 +210,16 @@ class _AddWorkExperienceState extends State<AddWorkExperience> {
                                 });
                               },
                             ),
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(6.0),
-                        child: Row(
-                          children: [
-                            Text(_startDate),
-                            Spacer(
-                              flex: 2,
+                            SizedBox(
+                              height: 10,
                             ),
+                            Text("End Date:"),
                             Text(_endDate),
                           ],
                         ),
+                      ),
+                      SizedBox(
+                        height: 20,
                       ),
                       SizedBox(
                         height: 5,

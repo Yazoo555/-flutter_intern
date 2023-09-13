@@ -25,7 +25,7 @@ extension OrgExtension on org {
 }
 
 class _AddOtherProjectState extends State<AddOtherProject> {
-  org? organizationValue = org.Yes;
+  org? organizationValue = org.No;
 
   TextEditingController orgNameController = TextEditingController();
   TextEditingController titleController = TextEditingController();
@@ -135,21 +135,14 @@ class _AddOtherProjectState extends State<AddOtherProject> {
                     SizedBox(
                       height: 18,
                     ),
-                    Row(
-                      children: [
-                        Text("Start Date"),
-                        Spacer(),
-                        Text("End Date"),
-                      ],
-                    ),
                     Padding(
                       padding: const EdgeInsets.all(16.0),
-                      child: Row(
+                      child: Column(
                         children: [
                           GestureDetector(
                             child: Icon(
                               Icons.calendar_today,
-                              size: 45,
+                              size: 40,
                             ),
                             onTap: () async {
                               DateTime? pickedDate = await showDatePicker(
@@ -166,11 +159,18 @@ class _AddOtherProjectState extends State<AddOtherProject> {
                               });
                             },
                           ),
-                          Spacer(),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Text("Start Date"),
+                          Text(_pStartDate),
+                          SizedBox(
+                            height: 30,
+                          ),
                           GestureDetector(
                             child: Icon(
                               Icons.calendar_today,
-                              size: 45,
+                              size: 40,
                             ),
                             onTap: () async {
                               DateTime? endDatePicked = await showDatePicker(
@@ -187,15 +187,13 @@ class _AddOtherProjectState extends State<AddOtherProject> {
                               });
                             },
                           ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Text("End Date"),
+                          Text(_pEndDate),
                         ],
                       ),
-                    ),
-                    Row(
-                      children: [
-                        Text(_pStartDate),
-                        Spacer(),
-                        Text(_pEndDate),
-                      ],
                     ),
                     Row(
                       children: [

@@ -402,8 +402,8 @@ class _CvPageState extends State<CvPage> {
 
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.black,
-                      fixedSize: Size(200, 45),
+                      backgroundColor: Colors.green.shade500,
+                      fixedSize: Size(150, 45),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(18.0),
                       )),
