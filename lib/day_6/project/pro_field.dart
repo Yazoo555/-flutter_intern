@@ -37,8 +37,11 @@ class ProjectData {
 class ProjectField extends StatelessWidget {
   final ProjectData? projectData;
   final VoidCallback projectOnTap;
-  const ProjectField({this.projectData, required this.projectOnTap, Key? key})
-      : super(key: key);
+  const ProjectField({
+    this.projectData,
+    required this.projectOnTap,
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

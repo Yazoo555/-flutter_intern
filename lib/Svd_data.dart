@@ -1,3 +1,4 @@
+// ignore: file_names
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:day_6_cv/day_6/education/edu_field.dart';
