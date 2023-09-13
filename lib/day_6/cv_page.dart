@@ -144,9 +144,9 @@ class _CvPageState extends State<CvPage> {
 
             child: Column(
               children: [
-                Text(
+                const Text(
                   "Curriculum Vitae",
-                  style: const TextStyle(
+                  style: TextStyle(
                       fontSize: 35,
                       fontWeight: FontWeight.w500,
                       color: Colors.deepOrangeAccent),
@@ -190,7 +190,7 @@ class _CvPageState extends State<CvPage> {
                     children: [
                       Text(
                         "Work Experience",
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w500,
                         ),
