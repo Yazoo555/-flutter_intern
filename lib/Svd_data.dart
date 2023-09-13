@@ -65,7 +65,8 @@ class _SavedDataState extends State<SavedData> {
                             padding: const EdgeInsets.all(8.0),
                             child: Container(
                               decoration: BoxDecoration(
-                                  border: Border.all(color: Colors.black26)),
+                                border: Border.all(color: Colors.black26),
+                              ),
                               height: 150,
                               child: ListView.builder(
                                 itemCount: cvData.workExperiences.length,
@@ -253,36 +254,39 @@ class _SavedDataState extends State<SavedData> {
                           SizedBox(
                             height: 25,
                           ),
-                          Column(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(12.0),
-                                child: ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor: Colors.red,
-                                    elevation: 4.0,
-                                    fixedSize: Size(130, 50),
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(12),
-                                    ),
-                                  ),
-                                  onPressed: _deleteSaveData,
-                                  child: Text(
-                                    "Delete Data",
-                                    style: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ),
-                              )
-                            ],
-                          )
                         ],
                       ),
                     ),
                   );
                 },
+              ),
+            ),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.red,
+                        elevation: 4.0,
+                        fixedSize: Size(130, 50),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                      ),
+                      onPressed: _deleteSaveData,
+                      child: Text(
+                        "Delete Data",
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
           ],
