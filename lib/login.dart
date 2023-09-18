@@ -88,10 +88,11 @@ class _loginState extends State<login> {
       return;
     } catch (e) {
       // ignore: use_build_context_synchronously
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-        content: Center(child: Text('Email or Password Incorrect')),
-        backgroundColor: Color.fromARGB(255, 188, 6, 103),
-      ));
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+            content: Center(child: Text('User Not Found')),
+            backgroundColor: Colors.redAccent),
+      );
       return;
     }
   }

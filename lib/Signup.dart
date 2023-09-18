@@ -74,6 +74,26 @@ class _SignupState extends State<Signup> {
     // ignore: use_build_context_synchronously
     Navigator.pushReplacement(
         context, MaterialPageRoute(builder: (context) => const login()));
+    setState(() {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text("Success"),
+            content: Text(
+                "User registered successfully!"), // Customize the message as needed
+            actions: <Widget>[
+              TextButton(
+                child: Text("OK"),
+                onPressed: () {
+                  Navigator.of(context).pop(); // Close the dialog
+                },
+              ),
+            ],
+          );
+        },
+      );
+    });
   }
 
   void _registerUser() async {
@@ -340,7 +360,7 @@ class _SignupState extends State<Signup> {
                             () {
                               try {
                                 // ignore: unused_local_variable
-                                Usermodel user = signuplist.firstWhere(
+                                Usermodel users = signuplist.firstWhere(
                                     (user) => user.email == email.text);
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   const SnackBar(
@@ -353,6 +373,7 @@ class _SignupState extends State<Signup> {
                                 return;
                               } catch (e) {
                                 _registerUser();
+
                                 return;
                               }
                             },

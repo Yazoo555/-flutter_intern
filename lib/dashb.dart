@@ -15,7 +15,7 @@ class _DashboardState extends State<Dashboard> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("This is Dash"),
+        title: const Text("This is Dashboard"),
       ),
       body: Center(
         child: Padding(
@@ -23,16 +23,34 @@ class _DashboardState extends State<Dashboard> {
           child: Column(
             children: [
               Text(
-                "Welcome to Dashboard",
+                "Welcome to Dashboard: ${widget.userData.fullname}",
                 style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
               ),
-              SizedBox(height: 20),
-              Text("Full Name: ${widget.userData.fullname}"),
-              Text("Email: ${widget.userData.email}"),
-              Text("Date of Birth: ${widget.userData.dateofbirth}"),
-              Text("Gender: ${widget.userData.gender}"),
-              Text("Mobile Number: ${widget.userData.mobilenumber}"),
-              Text("Marital Status: ${widget.userData.martialstatus}"),
+              SizedBox(height: 40),
+              Text(
+                "Full Name: ${widget.userData.fullname}",
+                style: TextStyle(fontSize: 18),
+              ),
+              Text(
+                "Email: ${widget.userData.email}",
+                style: TextStyle(fontSize: 18),
+              ),
+              Text(
+                "Date of Birth: ${widget.userData.dateofbirth}",
+                style: TextStyle(fontSize: 18),
+              ),
+              Text(
+                "Gender: ${widget.userData.gender}",
+                style: TextStyle(fontSize: 18),
+              ),
+              Text(
+                "Mobile Number: ${widget.userData.mobilenumber}",
+                style: TextStyle(fontSize: 18),
+              ),
+              Text(
+                "Marital Status: ${widget.userData.martialstatus}",
+                style: TextStyle(fontSize: 18),
+              ),
               // Add more fields as needed
             ],
           ),
