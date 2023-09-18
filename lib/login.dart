@@ -22,7 +22,7 @@ class _loginState extends State<login> {
   Future<List<String>> getuserdata() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? jsonData = prefs.getString('dataList');
-    print("aaa${jsonData}");
+    print("Data :${jsonData}");
     if (jsonData != null) {
       try {
         final decodedData = json.decode(jsonData) as List<dynamic>;
@@ -74,8 +74,8 @@ class _loginState extends State<login> {
       prefs.setString('userid', users.userid.toString());
 
       // ignore: use_build_context_synchronously
-      Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => const Dashboard()));
+      Navigator.pushReplacement(context,
+          MaterialPageRoute(builder: (context) => Dashboard(userData: users)));
       // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
         content: Center(
