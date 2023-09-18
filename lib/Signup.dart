@@ -52,7 +52,7 @@ class _SignupState extends State<Signup> {
     signuplist.add(
       Usermodel(
           fullname: fullname.text,
-          userid: const Uuid().v4().toString(),
+          userid: const Uuid().v4(),
           email: email.text,
           password: passwordController.text,
           mobilenumber: mobilenumber.text,
@@ -64,6 +64,7 @@ class _SignupState extends State<Signup> {
     List<Map<String, dynamic>> jsonDataList =
         signuplist.map((cv) => cv.toJson()).toList();
     signuplist.map((cv) => cv.toJson()).toList();
+    print(signuplist);
     sharedPreferences.setString('dataList', json.encode(jsonDataList));
 
     loginEmptyList[email.text] = jsonDataList;
@@ -98,11 +99,11 @@ class _SignupState extends State<Signup> {
               children: [
                 TextFormField(
                   validator: (text) {
-                    final regex = RegExp(r'^[a-zA-Z]{4,}(?: [a-zA-Z]+){0,2}$');
+                    final regex = RegExp(r'^[a-zA-Z0-9 ]*$');
                     if (text == null || text.isEmpty) {
                       return "should not be empty";
                     } else if (!regex.hasMatch(text)) {
-                      return "accepts only character";
+                      return "Name cannot have numbers";
                     }
                     return null;
                   },
@@ -204,6 +205,7 @@ class _SignupState extends State<Signup> {
                   height: 20,
                 ),
                 TextFormField(
+                  keyboardType: TextInputType.number,
                   validator: (value) {
                     RegExp regExp = RegExp(r'^(?:[+0]9)?[0-9]{10}$');
                     if (value!.isEmpty) {
@@ -259,9 +261,10 @@ class _SignupState extends State<Signup> {
                 ),
                 TextFormField(
                   validator: (text) {
-                    final regex = RegExp(r'\S+@\S+\.\S+');
+                    final regex = RegExp(
+                        r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
                     if (text == null || text.isEmpty) {
-                      return "should not be empty";
+                      return "This Field Should Not be Empty";
                     } else if (text.length > 15) {
                       return 'Length size=15';
                     } else if (!regex.hasMatch(text)) {
@@ -290,7 +293,7 @@ class _SignupState extends State<Signup> {
                     if (text == null || text.isEmpty) {
                       return "should not be empty";
                     } else if (!regex.hasMatch(text)) {
-                      return "password must contain special character,numbers and capital and small letter";
+                      return "Contain special character,numbers and capital and small letter";
                     }
                     return null;
                   },
