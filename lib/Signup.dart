@@ -31,7 +31,7 @@ class _SignupState extends State<Signup> {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     final jsonString = sharedPreferences.getString('dataList');
     List<Usermodel> signuplist = [];
-    print('User DATA: $jsonString');
+    print('User DATA: $jsonString'); // no need of print
 
     if (jsonString != null) {
       try {
