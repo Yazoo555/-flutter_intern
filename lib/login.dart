@@ -90,7 +90,7 @@ class _loginState extends State<login> {
       // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-            content: Center(child: Text('User Not Found')),
+            content: Center(child: Text('Invalid:User Not Found')),
             backgroundColor: Colors.redAccent),
       );
       return;
@@ -167,6 +167,7 @@ class _loginState extends State<login> {
                   children: [
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
+                        fixedSize: Size(110, 50),
                         elevation: 2,
                         foregroundColor: Colors.white,
                         backgroundColor: Colors.green.shade400,
@@ -199,7 +200,7 @@ class _loginState extends State<login> {
                     Text(
                       "No Account, Please:",
                       style:
-                          TextStyle(fontSize: 17, fontWeight: FontWeight.w400),
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
                     ),
                     TextButton(
                       onPressed: () {
@@ -207,7 +208,7 @@ class _loginState extends State<login> {
                             MaterialPageRoute(builder: (context) => Signup()));
                       },
                       child: Text(
-                        "Signup",
+                        "Sign-up",
                         style: TextStyle(
                             fontSize: 20, fontWeight: FontWeight.bold),
                       ),
