@@ -1,5 +1,3 @@
-import 'dart:io';
-
 class Usermodel {
   // File gallerypic;
   // File camerapic;
@@ -13,7 +11,7 @@ class Usermodel {
   String? martialstatus;
   String? email;
   String? password;
-  // File pdf;
+  String? pdf;
 
   Usermodel({
     // required this.camerapic,
@@ -28,7 +26,7 @@ class Usermodel {
     required this.martialstatus,
     required this.email,
     required this.password,
-    //   required this.pdf,
+    this.pdf,
   });
 
   Map<String, dynamic> toJson() {
@@ -41,8 +39,10 @@ class Usermodel {
     return {
       'image': image, // Include the image field in toJson
       'image2': image2, // Include the image2 field in toJson
+
       //  'gallerypic': gallerypicPath,
       //  'camerapic': camerapicPath,
+
       'userid': userid,
       'fullname': fullname,
       'gender': gender,
@@ -51,15 +51,15 @@ class Usermodel {
       'martialstatus': martialstatus,
       'email': email,
       'password': password,
-      //  'pdf': pdf
+      'pdf': pdf, // Include the pdf field in toJson
     };
   }
 
   factory Usermodel.fromJson(Map<String, dynamic> json) {
     //String imagepath = json["gallerypic"] ?? "";
     // String coverpath = json["camerapic"] ?? "";
-    String? imagepath = json['image'];
-    String? image2path = json['image2'];
+    //  String? imagepath = json['image'];
+    //  String? image2path = json['image2'];
 
     return Usermodel(
       //  image: imagepath != null ? File(imagepath) : null,
@@ -76,6 +76,7 @@ class Usermodel {
       martialstatus: json['martialstatus'],
       email: json['email'],
       password: json['password'],
+      pdf: json['pdf'], // Get the pdf field from json
       //   pdf: json['pdf'],
     );
   }

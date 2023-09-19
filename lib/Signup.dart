@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:day_seven/login.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:uuid/uuid.dart';
 import 'package:day_seven/model.dart';
@@ -30,6 +31,7 @@ class _SignupState extends State<Signup> {
   List<String> dropdownItem = ["Married", "Unmarried", "Divorced", "Widowed"];
   File? _image;
   File? _image2;
+  String pdf = 'No PDF selected';
 
   Future<void> _pickImageFromGallery() async {
     final imagePicker = ImagePicker();
@@ -54,9 +56,42 @@ class _SignupState extends State<Signup> {
     );
   }
 
+  Future<void> _pickPdf() async {
+    FilePickerResult? result = await FilePicker.platform.pickFiles(
+      type: FileType.custom,
+      allowedExtensions: ['pdf'],
+    );
+
+    if (result != null && result.files.isNotEmpty) {
+      setState(() {
+        pdf = result.files.single.name;
+        if (pdf == null || pdf.isEmpty) {
+          pdf =
+              'No PDF selected'; // Set a default value if name is null or empty
+        }
+      });
+
+      // Save the selected PDF path to SharedPreferences as a JSON string
+      SharedPreferences sharedPreferences =
+          await SharedPreferences.getInstance();
+
+      List<String>? pdfPaths = sharedPreferences.getStringList('pdfPaths');
+
+      if (pdfPaths == null) {
+        pdfPaths = [];
+      }
+
+      String? pdfPath = result.files.single.path;
+      if (pdfPath != null) {
+        pdfPaths.add(pdfPath);
+      }
+
+      sharedPreferences.setStringList('pdfPaths', pdfPaths);
+    }
+  }
+
   Future<void> signUp() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-
     final jsonString = sharedPreferences.getString('dataList');
     List<Usermodel> signuplist = [];
     print('User DATA: $jsonString'); // no need of print
@@ -93,6 +128,7 @@ class _SignupState extends State<Signup> {
           fullname: fullname.text,
           userid: const Uuid().v4(),
           email: email.text,
+          pdf: pdf != 'No PDF selected' ? pdf : null, // Add the PDF path
           password: passwordController.text,
           mobilenumber: mobilenumber.text,
           dateofbirth: dateofbirth.text,
@@ -471,6 +507,31 @@ class _SignupState extends State<Signup> {
                         ),
                       ),
                     ],
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: <Widget>[
+                        Text(
+                            "Selected PDF: $pdf"), // Display the name of the selected PDF
+                        SizedBox(height: 20),
+                        Align(
+                          alignment: Alignment.center,
+                          child: Padding(
+                            padding: const EdgeInsets.all(12.0),
+                            child: FloatingActionButton(
+                              onPressed: _pickPdf,
+                              child: Icon(Icons.upload_file_rounded),
+                              backgroundColor: Colors.grey.shade600,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                   SizedBox(
                     height: 25,

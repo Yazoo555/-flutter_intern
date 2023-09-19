@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:day_seven/model.dart';
-import 'dart:io'; // Import your Usermodel class
+import 'package:flutter/rendering.dart';
+import 'dart:io';
+import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart'; // Import your Usermodel class
 
 class Dashboard extends StatefulWidget {
   final Usermodel userData;
@@ -14,6 +16,7 @@ class Dashboard extends StatefulWidget {
 class _DashboardState extends State<Dashboard> {
   File? imageFile;
   File? image2File;
+  File? selectedPdfFile;
 
   @override
   void initState() {
@@ -23,6 +26,8 @@ class _DashboardState extends State<Dashboard> {
         widget.userData.image != null ? File(widget.userData.image!) : null;
     image2File =
         widget.userData.image2 != null ? File(widget.userData.image2!) : null;
+    selectedPdfFile =
+        widget.userData.pdf != null ? File(widget.userData.pdf!) : null;
   }
 
   @override
@@ -33,29 +38,19 @@ class _DashboardState extends State<Dashboard> {
       ),
       body: Center(
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(12.0),
           child: Column(
             children: [
               Text(
-                "Welcome to Dashboard: ${widget.userData.fullname}",
+                "Welcome: ${widget.userData.fullname}",
                 style:
                     const TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
               ),
-              const SizedBox(height: 15),
-              //
-              if (imageFile != null)
-                Image.file(
-                  imageFile!,
-                  width: 200,
-                  height: 200,
-                ),
-              if (image2File != null)
-                Image.file(
-                  image2File!,
-                  width: 200,
-                  height: 200,
-                ),
-//
+
+              const SizedBox(
+                height: 15,
+              ),
+
               Text(
                 "Full Name: ${widget.userData.fullname}",
                 style: const TextStyle(fontSize: 18),
@@ -81,9 +76,73 @@ class _DashboardState extends State<Dashboard> {
                 style: const TextStyle(fontSize: 18),
               ),
               // Add more fields as needed
+              const SizedBox(
+                height: 25,
+              ),
+
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  children: [
+                    if (imageFile != null)
+                      Image.file(
+                        imageFile!,
+                        width: 150,
+                        height: 150,
+                      ),
+                    if (image2File != null)
+                      Image.file(
+                        image2File!,
+                        width: 150,
+                        height: 150,
+                      ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 15,
+              ),
+              if (selectedPdfFile != null)
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            PdfViewerPage(pdfFile: selectedPdfFile!),
+                      ),
+                    );
+                    print(selectedPdfFile);
+                  },
+                  child: Text("Open PDF"),
+                ),
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class PdfViewerPage extends StatelessWidget {
+  final File pdfFile;
+
+  const PdfViewerPage({required this.pdfFile, Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("PDF Viewer"),
+      ),
+      body: Column(
+        children: [
+          if (pdfFile != null)
+            Container(
+              height: 500,
+              child: SfPdfViewer.file(pdfFile),
+            )
+        ],
       ),
     );
   }
