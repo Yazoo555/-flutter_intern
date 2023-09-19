@@ -24,32 +24,33 @@ class _DashboardState extends State<Dashboard> {
             children: [
               Text(
                 "Welcome to Dashboard: ${widget.userData.fullname}",
-                style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                style:
+                    const TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
               ),
-              SizedBox(height: 40),
+              const SizedBox(height: 40),
               Text(
                 "Full Name: ${widget.userData.fullname}",
-                style: TextStyle(fontSize: 18),
+                style: const TextStyle(fontSize: 18),
               ),
               Text(
                 "Email: ${widget.userData.email}",
-                style: TextStyle(fontSize: 18),
+                style: const TextStyle(fontSize: 18),
               ),
               Text(
                 "Date of Birth: ${widget.userData.dateofbirth}",
-                style: TextStyle(fontSize: 18),
+                style: const TextStyle(fontSize: 18),
               ),
               Text(
                 "Gender: ${widget.userData.gender}",
-                style: TextStyle(fontSize: 18),
+                style: const TextStyle(fontSize: 18),
               ),
               Text(
                 "Mobile Number: ${widget.userData.mobilenumber}",
-                style: TextStyle(fontSize: 18),
+                style: const TextStyle(fontSize: 18),
               ),
               Text(
                 "Marital Status: ${widget.userData.martialstatus}",
-                style: TextStyle(fontSize: 18),
+                style: const TextStyle(fontSize: 18),
               ),
               // Add more fields as needed
             ],

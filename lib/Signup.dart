@@ -120,23 +120,20 @@ class _SignupState extends State<Signup> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   TextFormField(
-                    validator: (text) {
-                      final regex = RegExp(r'^[a-zA-Z0-9 ]*$');
-                      if (text == null || text.isEmpty) {
-                        return "should not be empty";
-                      } else if (!regex.hasMatch(text)) {
-                        return "Name cannot have numbers";
+                    controller: fullname,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return "Enter Full Name";
+                      } else if (RegExp(r'[^a-zA-Z ]').hasMatch(value)) {
+                        return 'Name cannot have numbers';
                       }
                       return null;
                     },
-                    controller: fullname,
                     decoration: InputDecoration(
-                      labelText: 'Full Name',
-                      labelStyle: const TextStyle(fontSize: 16),
-                      hintText: 'Enter your fullname',
+                      hintText: "Enter Full Name",
                       border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20),
-                        borderSide: const BorderSide(color: Colors.black),
+                        borderRadius: BorderRadius.circular(14),
+                        borderSide: BorderSide(color: Colors.black),
                       ),
                     ),
                   ),
@@ -287,15 +284,13 @@ class _SignupState extends State<Signup> {
                     height: 20,
                   ),
                   TextFormField(
-                    validator: (text) {
-                      final regex = RegExp(
-                          r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
-                      if (text == null || text.isEmpty) {
-                        return "This Field Should Not be Empty";
-                      } else if (text.length > 15) {
-                        return 'Length size=15';
-                      } else if (!regex.hasMatch(text)) {
-                        return "enter a valid mail";
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return "Enter Your Email";
+                      } else if (!RegExp(
+                              r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                          .hasMatch(value)) {
+                        return 'Invalid email format';
                       }
                       return null;
                     },
@@ -314,13 +309,11 @@ class _SignupState extends State<Signup> {
                     height: 20,
                   ),
                   TextFormField(
-                    validator: (text) {
-                      final regex =
-                          RegExp(r"(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W)");
-                      if (text == null || text.isEmpty) {
-                        return "should not be empty";
-                      } else if (!regex.hasMatch(text)) {
-                        return "Contain special character,numbers and capital and small letter";
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return "Please enter password";
+                      } else if (value.length < 8) {
+                        return 'Password must be at least 8 characters long';
                       }
                       return null;
                     },
