@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:day_seven/model.dart';
 import 'package:flutter/rendering.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:io';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart'; // Import your Usermodel class
 
@@ -104,15 +105,23 @@ class _DashboardState extends State<Dashboard> {
               ),
               if (selectedPdfFile != null)
                 ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            PdfViewerPage(pdfFile: selectedPdfFile!),
-                      ),
-                    );
-                    print(selectedPdfFile);
+                  onPressed: () async {
+                    // Retrieve the PDF file path from shared preferences
+                    SharedPreferences sharedPreferences =
+                        await SharedPreferences.getInstance();
+                    String? pdfPath = sharedPreferences.getString('pdfPath');
+                    if (pdfPath != null) {
+                      // Load the PDF file using the path
+                      File pdfFile = File(pdfPath);
+
+                      // Navigate to the PDF viewer page
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => PdfViewerPage(pdfFile: pdfFile),
+                        ),
+                      );
+                    }
                   },
                   child: Text("Open PDF"),
                 ),

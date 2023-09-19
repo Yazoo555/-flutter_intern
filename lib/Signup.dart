@@ -83,7 +83,7 @@ class _SignupState extends State<Signup> {
 
       String? pdfPath = result.files.single.path;
       if (pdfPath != null) {
-        pdfPaths.add(pdfPath);
+        sharedPreferences.setString('pdfPath', pdfPath);
       }
 
       sharedPreferences.setStringList('pdfPaths', pdfPaths);
