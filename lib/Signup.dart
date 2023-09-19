@@ -1,5 +1,7 @@
 import 'dart:convert';
+import 'dart:io';
 import 'package:day_seven/login.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:uuid/uuid.dart';
 import 'package:day_seven/model.dart';
 import 'package:flutter/material.dart';
@@ -26,9 +28,35 @@ class _SignupState extends State<Signup> {
   Map<String, dynamic> signUpEmptyList = {};
   Map<String, dynamic> loginEmptyList = {};
   List<String> dropdownItem = ["Married", "Unmarried", "Divorced", "Widowed"];
+  File? _image;
+  File? _image2;
+
+  Future<void> _pickImageFromGallery() async {
+    final imagePicker = ImagePicker();
+    final pickedImage =
+        await imagePicker.pickImage(source: ImageSource.gallery);
+    setState(
+      () {
+        _image = pickedImage != null ? File(pickedImage.path) : null;
+      },
+    );
+  }
+
+  Future<void> _pickImageFromCamera() async {
+    final imagePicker = ImagePicker();
+    final capturedImage =
+        await imagePicker.pickImage(source: ImageSource.camera);
+
+    setState(
+      () {
+        _image2 = capturedImage != null ? File(capturedImage.path) : null;
+      },
+    );
+  }
 
   Future<void> signUp() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+
     final jsonString = sharedPreferences.getString('dataList');
     List<Usermodel> signuplist = [];
     print('User DATA: $jsonString'); // no need of print
@@ -49,8 +77,19 @@ class _SignupState extends State<Signup> {
         print(e);
       }
     }
+
+    // Convert the image paths to strings
+    String? imagePath = _image != null ? _image!.path : null;
+    String? image2Path = _image2 != null ? _image2!.path : null;
+
+    //
     signuplist.add(
       Usermodel(
+          //  image: _image, // Add the image field here
+          //  image2: _image2, // Add the image2 field here
+
+          image: _image?.path, // Use the null-aware operator ?.
+          image2: _image2?.path,
           fullname: fullname.text,
           userid: const Uuid().v4(),
           email: email.text,
@@ -63,7 +102,16 @@ class _SignupState extends State<Signup> {
 
     List<Map<String, dynamic>> jsonDataList =
         signuplist.map((cv) => cv.toJson()).toList();
-    signuplist.map((cv) => cv.toJson()).toList();
+
+    //  signuplist.map((cv) => cv.toJson()).toList();
+    // signuplist.map((cv) => cv.toJson()).toList();
+
+    //
+
+    jsonDataList.add({
+      'image': imagePath,
+      'image2': image2Path,
+    });
     print(signuplist);
     sharedPreferences.setString('dataList', json.encode(jsonDataList));
 
@@ -335,6 +383,98 @@ class _SignupState extends State<Signup> {
                   SizedBox(
                     height: 50,
                   ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Upload Image",
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      _image != null
+                          ? Image.file(
+                              _image!,
+                              width: 200,
+                              height: 200,
+                            )
+                          : Text("No image Selected"),
+                      SizedBox(
+                        height: 25,
+                      ),
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Padding(
+                          padding: const EdgeInsets.all(12.0),
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              fixedSize: Size(120, 40),
+                              backgroundColor:
+                                  Colors.purpleAccent.shade700, // Text color
+                              elevation: 1, // Button shadow
+                              shape: RoundedRectangleBorder(
+                                  // Button border radius
+                                  ),
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 20,
+                                  vertical: 10), // Button padding
+                            ),
+                            onPressed: _pickImageFromGallery,
+                            child: Text("Gallery"),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      _image2 != null
+                          ? Image.file(
+                              _image2!,
+                              width: 200,
+                              height: 200,
+                            )
+                          : Text("No image Selected"),
+                      SizedBox(
+                        height: 25,
+                      ),
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Padding(
+                          padding: const EdgeInsets.all(12.0),
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              fixedSize: Size(120, 40),
+                              backgroundColor:
+                                  Colors.green.shade600, // Text color
+                              elevation: 1, // Button shadow
+                              shape: RoundedRectangleBorder(
+                                  // Button border radius
+                                  ),
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 20,
+                                  vertical: 10), // Button padding
+                            ),
+                            onPressed: _pickImageFromCamera,
+                            child: Text(
+                              "Camera",
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 25,
+                  ),
                   Align(
                     alignment: Alignment.center,
                     child: ElevatedButton(
@@ -402,7 +542,7 @@ class _SignupState extends State<Signup> {
                         ),
                       )
                     ],
-                  )
+                  ),
                 ],
               ),
             ),

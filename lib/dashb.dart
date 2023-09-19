@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:day_seven/model.dart'; // Import your Usermodel class
+import 'package:day_seven/model.dart';
+import 'dart:io'; // Import your Usermodel class
 
 class Dashboard extends StatefulWidget {
   final Usermodel userData;
@@ -11,6 +12,19 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
+  File? imageFile;
+  File? image2File;
+
+  @override
+  void initState() {
+    super.initState();
+    // Load the user's images as File objects
+    imageFile =
+        widget.userData.image != null ? File(widget.userData.image!) : null;
+    image2File =
+        widget.userData.image2 != null ? File(widget.userData.image2!) : null;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,7 +41,21 @@ class _DashboardState extends State<Dashboard> {
                 style:
                     const TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
               ),
-              const SizedBox(height: 40),
+              const SizedBox(height: 15),
+              //
+              if (imageFile != null)
+                Image.file(
+                  imageFile!,
+                  width: 200,
+                  height: 200,
+                ),
+              if (image2File != null)
+                Image.file(
+                  image2File!,
+                  width: 200,
+                  height: 200,
+                ),
+//
               Text(
                 "Full Name: ${widget.userData.fullname}",
                 style: const TextStyle(fontSize: 18),
