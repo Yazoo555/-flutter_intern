@@ -26,9 +26,17 @@ class _SignupState extends State<Signup> {
   String gender = 'Male';
   List<String> grpVal = ['Male', 'Female', 'Others'];
   String selectValue = "Married";
-  Map<String, dynamic> signUpEmptyList = {};
+
+  //Map<String, dynamic> signUpEmptyList = {};
   Map<String, dynamic> loginEmptyList = {};
-  List<String> dropdownItem = ["Married", "Unmarried", "Divorced", "Widowed"];
+
+  List<String> dropdownItem = [
+    "Married",
+    "Unmarried",
+    "Divorced",
+    "Widowed",
+    "It's Complicated"
+  ];
   File? _image;
   File? _image2;
   String pdf = 'No PDF selected';
@@ -63,10 +71,19 @@ class _SignupState extends State<Signup> {
     );
 
     if (result != null && result.files.isNotEmpty) {
-      setState(() {
-        pdf = result.files.single.name;
-        pdf = 'No PDF selected'; // Set a default value if name is null or empty
-      });
+      setState(
+        () {
+          pdf = result.files.single.name;
+
+/*
+        if (pdf == null || pdf.isEmpty) {
+          pdf =
+              'No PDF selected'; // Set a default value if name is null or empty
+        }
+        */
+          //
+        },
+      );
 
       // Save the selected PDF path to SharedPreferences as a JSON string
       SharedPreferences sharedPreferences =
@@ -432,7 +449,7 @@ class _SignupState extends State<Signup> {
                         height: 25,
                       ),
                       Align(
-                        alignment: Alignment.centerLeft,
+                        alignment: Alignment.center,
                         child: Padding(
                           padding: const EdgeInsets.all(12.0),
                           child: ElevatedButton(
@@ -472,7 +489,7 @@ class _SignupState extends State<Signup> {
                         height: 25,
                       ),
                       Align(
-                        alignment: Alignment.centerLeft,
+                        alignment: Alignment.center,
                         child: Padding(
                           padding: const EdgeInsets.all(12.0),
                           child: ElevatedButton(
