@@ -59,16 +59,13 @@ class _SignupState extends State<Signup> {
   Future<void> _pickPdf() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
       type: FileType.custom,
-      allowedExtensions: ['.pdf'],
+      allowedExtensions: ['pdf'],
     );
 
     if (result != null && result.files.isNotEmpty) {
       setState(() {
         pdf = result.files.single.name;
-        if (pdf == null || pdf.isEmpty) {
-          pdf =
-              'No PDF selected'; // Set a default value if name is null or empty
-        }
+        pdf = 'No PDF selected'; // Set a default value if name is null or empty
       });
 
       // Save the selected PDF path to SharedPreferences as a JSON string

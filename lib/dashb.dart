@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:day_seven/model.dart';
-import 'package:flutter/rendering.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:io';
-import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart'; // Import your Usermodel class
+import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
 class Dashboard extends StatefulWidget {
   final Usermodel userData;
@@ -146,11 +145,10 @@ class PdfViewerPage extends StatelessWidget {
       ),
       body: Column(
         children: [
-          if (pdfFile != null)
-            Container(
-              height: 500,
-              child: SfPdfViewer.file(pdfFile),
-            )
+          Container(
+            height: 600,
+            child: SfPdfViewer.file(pdfFile),
+          ),
         ],
       ),
     );
