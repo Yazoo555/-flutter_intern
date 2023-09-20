@@ -59,7 +59,7 @@ class _SignupState extends State<Signup> {
   Future<void> _pickPdf() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
       type: FileType.custom,
-      allowedExtensions: ['pdf'],
+      allowedExtensions: ['.pdf'],
     );
 
     if (result != null && result.files.isNotEmpty) {
@@ -120,10 +120,7 @@ class _SignupState extends State<Signup> {
     //
     signuplist.add(
       Usermodel(
-          //  image: _image, // Add the image field here
-          //  image2: _image2, // Add the image2 field here
-
-          image: _image?.path, // Use the null-aware operator ?.
+          image: _image?.path,
           image2: _image2?.path,
           fullname: fullname.text,
           userid: const Uuid().v4(),
@@ -138,11 +135,6 @@ class _SignupState extends State<Signup> {
 
     List<Map<String, dynamic>> jsonDataList =
         signuplist.map((cv) => cv.toJson()).toList();
-
-    //  signuplist.map((cv) => cv.toJson()).toList();
-    // signuplist.map((cv) => cv.toJson()).toList();
-
-    //
 
     jsonDataList.add({
       'image': imagePath,
