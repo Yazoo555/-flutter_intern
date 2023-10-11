@@ -1,0 +1,120 @@
+[
+    {
+    
+        "id": "1",
+        "fullname":"Ram Lama",
+        "email":"ram@gmail.com",
+        "password":"ram@#123",     
+       "mobilenumber": "945425224",
+        "gender":"Male",
+        "dob":"2018-12-12",      
+       "martialStatus":"Single",        
+       "imageUrl":"assets/images/41430.jpg"
+
+    },
+    {
+        "id": "2",
+        "fullname":"Rajesh Hamal",
+        "email":"rajesh@gmail.com",
+        "password":"rajesh@#123",
+        "mobilenumber": "9810000000",
+        "gender":"Male",
+        "dob":"2006-03-03",      
+       "martialStatus":"Married",        
+       "imageUrl":"assets/images/6821460_60561.jpg"
+        
+    },
+    {
+        "id": "3",
+        "fullname":"Rakesh KC",
+        "email":"rakesh@gmail.com",
+        "password":"rakesh@#123",
+        "mobilenumber": "9485425224",
+        "gender":"Female",
+        "dob":"2023-12-12",      
+       "martialStatus":"Single",   
+        "imageUrl":"assets/images/divorce.png"
+        
+    },
+    {
+        "id": "4",
+        "fullname":"Sagar Shrestha",
+        "email":"sagar@gmail.com",
+        "password":"sagar@#123",
+        "mobilenumber": "945425224",
+        "gender":"Male",
+        "dob":"2018-12-12",      
+       "martialStatus":"Married",        
+       "imageUrl": "assets/images/married.png"
+       
+    },
+    {
+        "id": "5",
+        "fullname":"Deepa Sharma",
+        "email":"deepa@gmail.com",
+        "password":"deepa@#123",
+        "mobilenumber": "981290832",
+        "gender":"Female",
+        "dob":"1999-06-12",      
+       "martialStatus":"Married",        
+       "imageUrl": "assets/images/young-beautiful-woman-pink-warm-sweater-natural-look-smiling-portrait-isolated-long-hair.jpg"
+        
+    },
+    {
+        "id": "6",
+        "fullname":"Arun Subadi",
+        "email":"arun@gmail.com",
+        "password":"Arun@1234",
+        "mobilenumber": "98603983123",
+        "gender":"Male",
+        "dob":"2000-09-30",      
+       "martialStatus":"Single",        
+       "imageUrl": "assets/images/7lo.jpg"
+               },
+    {
+        "id": "7",
+        "fullname":"Sandip Shrestha",
+        "email":"sandip@gmail.com",
+        "password":"Sandip@123",
+        "mobilenumber": "9810425224",
+        "gender":"Female",
+        "dob":"2018-12-12",      
+       "martialStatus":"Married",        
+       "imageUrl": "assets/images/6786.jpg"
+              },
+    {
+        "id":"8",
+        "fullname":"Rabin Regmi",
+        "email":"rabin@gmail.com",
+        "password":"Rabin@123",
+        "mobilenumber": "982341230",
+        "gender":"Male",
+        "dob":"2020-01-20",      
+       "martialStatus":"Married",        
+       "imageUrl": "assets/images/85191_Brad_Pitt_Levi.jpg"
+       
+    },
+    {
+        "id":"9",
+        "fullname":"Milan Aryal",
+        "email":"milan@gmail.com",
+        "password":"Milan@123",
+        "mobilenumber": "98102303203",
+        "gender":"Male",
+        "dob":"2010-09-10",      
+       "martialStatus":"Single",        
+       "imageUrl": "assets/images/divorce.png"
+        
+           },
+    {
+        "id": "10",
+        "fullname":"Aja Gurung",
+        "email":"aja@gmail.com",
+        "password":"Aja@1234",
+        "mobilenumber": "983092349",
+        "gender":"Male",
+        "dob":"2018-12-12",      
+       "martialStatus":"Married",        
+       "imageUrl": "assets/images/widowed.png"
+          }
+]
