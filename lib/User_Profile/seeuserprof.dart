@@ -30,7 +30,6 @@ class _seeuserproState extends State<seeuserpro> {
   }
 
   var indexOfIt = -1;
-
   @override
   void initState() {
     super.initState();
@@ -90,7 +89,7 @@ class _seeuserproState extends State<seeuserpro> {
   Future<List<String>> getUserData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? jsonData = prefs.getString('request');
-    //  print(jsonData);
+    print(jsonData);
 
     if (jsonData != null) {
       try {
@@ -200,15 +199,16 @@ class _seeuserproState extends State<seeuserpro> {
                           print('Before cancellation: $requestAcceptOrCancle');
                           requestAcceptOrCancle.removeAt(indexOfIt);
                           print('After cancellation: $requestAcceptOrCancle');
-
                           String update = jsonEncode(requestAcceptOrCancle);
                           SharedPreferences prefs =
                               await SharedPreferences.getInstance();
                           prefs.setString('request', update);
                           getUserData();
-                          setState(() {
-                            indexOfIt = -1;
-                          });
+                          setState(
+                            () {
+                              indexOfIt = -1;
+                            },
+                          );
                         } else {
                           sendRequest();
                           setState(() {
@@ -242,9 +242,7 @@ class _seeuserproState extends State<seeuserpro> {
                                     fontSize: 17,
                                   ),
                                 ),
-                                duration: Duration(
-                                    seconds:
-                                        2), // Adjust the duration as needed
+                                duration: Duration(seconds: 2),
                               ),
                             );
                           },
