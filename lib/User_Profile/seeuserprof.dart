@@ -19,21 +19,21 @@ class seeuserpro extends StatefulWidget {
 
 // ignore: camel_case_types
 class _seeuserproState extends State<seeuserpro> {
-  UserModel? friendkoDetails;
-
+  UserModel? friendId;
+/*
   getUsersDetails() {
     try {
-      friendkoDetails = usersData.firstWhere((e) => e.id == widget.id);
+      friendId = usersData.firstWhere((e) => e.id == widget.id);
     } catch (e) {
       rethrow;
     }
   }
-
+*/
   var indexOfIt = -1;
   @override
   void initState() {
     super.initState();
-    getUsersDetails();
+    //   getUsersDetails();
     getUserData();
     getUserId();
     compare();
@@ -45,14 +45,17 @@ class _seeuserproState extends State<seeuserpro> {
 
     if (userIdData != null) {
       try {
-        friendkoDetails =
+/*
+        friendId =
             usersData.firstWhere((user) => user.id.toString() == userIdData);
-        print('===friend id: ${friendkoDetails?.fullname}');
+        print('===friend id: ${friendId?.fullname}');
+*/
+        friendId = usersData.firstWhere((e) => e.id == widget.id);
       } catch (e) {
         print(e);
       }
     } else {
-      friendkoDetails;
+      friendId;
     }
     return [];
   }
@@ -60,7 +63,7 @@ class _seeuserproState extends State<seeuserpro> {
   Future<void> compare() async {
     if (request.isNotEmpty) {
       indexOfIt = request.indexWhere((e) =>
-          e.friendId == friendkoDetails!.id &&
+          e.friendId == friendId!.id &&
           e.requestedBy == loginUsers!.id &&
           e.userId == loginUsers!.id);
     } else {
@@ -100,7 +103,7 @@ class _seeuserproState extends State<seeuserpro> {
               decodedData.map((e) => UserFriendListModel.fromJson(e)).toList();
         });
         indexOfIt = request.indexWhere((e) =>
-            e.friendId == friendkoDetails!.id &&
+            e.friendId == friendId!.id &&
             e.requestedBy == loginUsers!.id &&
             e.userId == loginUsers!.id);
       } catch (e) {
@@ -119,7 +122,7 @@ class _seeuserproState extends State<seeuserpro> {
         user_list_id: const Uuid().v4(),
         createdAt: DateTime.now().toString(),
         hasNewRequest: true,
-        friendId: friendkoDetails!.id!,
+        friendId: friendId!.id!,
         userId: loginUsers!.id!,
         hasNewRequestAccepted: false,
         requestedBy: loginUsers!.id!,
@@ -147,7 +150,7 @@ class _seeuserproState extends State<seeuserpro> {
           icon: Icon(Icons.arrow_back_ios_new),
         ),
         title: Text(
-          "${friendkoDetails!.fullname}'s Profile",
+          "${friendId!.fullname}'s Profile",
           style: GoogleFonts.prompt(
             fontSize: 22,
             color: Colors.black87,
@@ -171,18 +174,18 @@ class _seeuserproState extends State<seeuserpro> {
                           Border.all(width: 6.0, color: Colors.green.shade300),
                     ),
                     child: ClipOval(
-                      child: friendkoDetails?.image?.path != ""
+                      child: friendId?.image?.path != ""
                           ? Image(
                               height: 120,
                               width: 120,
-                              image: FileImage(friendkoDetails!.image!),
+                              image: FileImage(friendId!.image!),
                               fit: BoxFit.cover,
                             )
                           : Image(
                               height: 120,
                               width: 120,
                               fit: BoxFit.cover,
-                              image: AssetImage('${friendkoDetails?.imageUrl}'),
+                              image: AssetImage('${friendId?.imageUrl}'),
                             ),
                     ),
                   ),
@@ -264,9 +267,9 @@ class _seeuserproState extends State<seeuserpro> {
                 ),
                 Column(
                   children: [
-                    friendkoDetails?.fullname != ""
+                    friendId?.fullname != ""
                         ? Text(
-                            "Name: ${friendkoDetails!.fullname}",
+                            "Name: ${friendId!.fullname}",
                             style: GoogleFonts.aBeeZee(
                               fontSize: 20,
                               fontWeight: FontWeight.w300,
@@ -276,9 +279,9 @@ class _seeuserproState extends State<seeuserpro> {
                     SizedBox(
                       height: 5,
                     ),
-                    friendkoDetails?.email != ""
+                    friendId?.email != ""
                         ? Text(
-                            "Email: ${friendkoDetails!.email}",
+                            "Email: ${friendId!.email}",
                             style: GoogleFonts.aBeeZee(
                               fontSize: 20,
                               fontWeight: FontWeight.w300,
@@ -311,7 +314,7 @@ class _seeuserproState extends State<seeuserpro> {
                         child: Icon(Icons.phone),
                       ),
                       title: Text(
-                        "${friendkoDetails!.mobilenumber}",
+                        "${friendId!.mobilenumber}",
                         style: GoogleFonts.aBeeZee(
                           textStyle: TextStyle(
                             fontSize: 16,
@@ -340,7 +343,7 @@ class _seeuserproState extends State<seeuserpro> {
                         child: Icon(Icons.calendar_month),
                       ),
                       title: Text(
-                        "${friendkoDetails!.dob}",
+                        "${friendId!.dob}",
                         style: GoogleFonts.aBeeZee(
                           textStyle: TextStyle(
                             fontSize: 16,
@@ -371,7 +374,7 @@ class _seeuserproState extends State<seeuserpro> {
                         ),
                       ),
                       title: Text(
-                        "${friendkoDetails!.martialStatus}",
+                        "${friendId!.martialStatus}",
                         style: GoogleFonts.aBeeZee(
                           textStyle: TextStyle(
                             fontSize: 16,
@@ -405,7 +408,7 @@ class _seeuserproState extends State<seeuserpro> {
                             width: 8,
                           ),
                           Text(
-                            "${friendkoDetails!.gender}",
+                            "${friendId!.gender}",
                             style: GoogleFonts.aBeeZee(
                               textStyle: TextStyle(
                                 fontSize: 16,

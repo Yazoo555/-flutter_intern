@@ -46,7 +46,6 @@ class _FriendScreenState extends State<FriendScreen> {
                 ),
 */
               ],
-              // Handle tab selection
             ),
             Expanded(
               child: TabBarView(
